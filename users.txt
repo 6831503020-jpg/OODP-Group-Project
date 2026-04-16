@@ -1,0 +1,2 @@
+admin|48690|ADMIN|admin@gmail.com|Management
+Leader1|48690|LEADER|leader1@gmail.com|Management
