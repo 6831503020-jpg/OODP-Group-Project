@@ -1,4 +1,10 @@
 // User.java
+
+/**
+ * CONCEPT: INHERITANCE & ENCAPSULATION
+ * Why: The 'User' class stores shared attributes. Subclasses (Admin, Leader, Student) 
+ */
+
 public abstract class User {
     String username, password, email, skill;
     Role role;

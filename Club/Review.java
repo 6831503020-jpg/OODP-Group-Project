@@ -1,4 +1,11 @@
 // Review.java
+
+/**
+ * CONCEPT: MODULAR STORAGE
+ * Why: Separating Review allows the system to load feedback independently 
+ * of club data, optimizing memory usage.
+ */
+
 public class Review {
     String event, student, comment;
     int rating;

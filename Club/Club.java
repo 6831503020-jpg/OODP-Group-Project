@@ -1,5 +1,12 @@
 // Club.java
 import java.util.*;
+
+/**
+ * CONCEPT: COMPOSITION
+ * Why: A Club contains Announcements and Members. By giving Club its own file, 
+ * we can manage complex "one-to-many" relationships without cluttering the main logic.
+ */
+
 public class Club {
     String name, leader, requiredSkill;
     ArrayList<Announcement> announcements = new ArrayList<>();

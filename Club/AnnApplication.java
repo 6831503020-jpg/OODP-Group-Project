@@ -1,4 +1,11 @@
 // AnnApplication.java
+
+/**
+ * CONCEPT: DATA TRANSFER OBJECT (DTO)
+ * Why: This class only cares about carrying data between the Student 
+ * and the Club Leader, keeping the communication protocol clean.
+ */
+
 public class AnnApplication {
     String username, fullName, studentId, email, school, year, position, motivation;
     Status status = Status.PENDING;

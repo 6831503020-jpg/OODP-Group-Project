@@ -1,6 +1,12 @@
 import java.util.*;
 import java.io.*;
 
+/**
+ * CONCEPT: ABSTRACTION (The Manager Pattern)
+ * Why: Decouples user operations from the Main loop. This file is the only place 
+ * that "knows" about 'users.txt', shielding the rest of the app from file-handling complexity.
+ */
+
 public class UserManager {
     ArrayList<User> users = new ArrayList<>();
 
