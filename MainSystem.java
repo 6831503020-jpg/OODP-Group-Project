@@ -60,7 +60,7 @@ public class MainSystem {
             Scanner sc) {
         if (current.role == Role.ADMIN) {
             switch (choice) {
-                case 1 -> {
+                case 1: {
                     UI.prompt("Club name");
                     String n = sc.nextLine();
                     UI.prompt("Required Skill");
@@ -70,13 +70,13 @@ public class MainSystem {
                     clubData.getList().add(new Club(n, l, s));
                     UI.success("Club created.");
                 }
-                case 2 -> {
+                case 2: {
                     for (Club c : clubData.getList()) {
                         UI.header("CLUB: " + c.name);
                         System.out.println("Leader: " + c.leader + " | Skill: " + c.requiredSkill);
                     }
                 }
-                case 3 -> {
+                case 3: {
                     UI.prompt("Club name to delete");
                     String n = sc.nextLine();
                     UI.warning("Delete '" + n + "'? (y/n)");
@@ -85,7 +85,7 @@ public class MainSystem {
                         UI.success("Deleted.");
                     }
                 }
-                case 4 -> {
+                case 4: {
                     UI.header("SYSTEM DASHBOARD");
                     System.out.println(
                             "Total Clubs: " + clubData.getList().size() + "\nTotal Reviews: " + reviews.size());
@@ -102,7 +102,7 @@ public class MainSystem {
             }
 
             switch (choice) {
-                case 1 -> {
+                case 1: {
                     UI.prompt("Title");
                     String t = sc.nextLine();
                     UI.prompt("Type [1] Event [2] Staff");
@@ -117,7 +117,7 @@ public class MainSystem {
                             ty == 1 ? AnnouncementType.EVENT : AnnouncementType.STAFF_CALLING, cap));
                     UI.success("Posted.");
                 }
-                case 2 -> {
+                case 2: {
                     UI.header("ANNOUNCEMENTS: " + myClub.name);
                     UI.tableHeader("Index", "Title", "Applicants/Cap", "Type");
                     for (int i = 0; i < myClub.announcements.size(); i++) {
@@ -126,7 +126,7 @@ public class MainSystem {
                                 a.type.toString());
                     }
                 }
-                case 3 -> {
+                case 3: {
                     UI.header("REVIEW APPLICATIONS");
                     System.out
                             .println("[1] Club Memberships (" + myClub.clubApplications.size() + ") [2] Announcements");
@@ -160,7 +160,7 @@ public class MainSystem {
                         }
                     }
                 }
-                case 5 -> {
+                case 5: {
                     UI.header("MEMBERS");
                     System.out.println("Members: " + myClub.members);
                     UI.prompt("[1] Add [2] Remove");
@@ -174,7 +174,7 @@ public class MainSystem {
                             myClub.members.remove(u.trim());
                     }
                 }
-                case 6 -> {
+                case 6: {
                     UI.header("MY CLUB");
                     System.out.println("Name: " + myClub.name + "\nSkill: " + myClub.requiredSkill + "\nMembers: "
                             + myClub.members.size());
@@ -182,7 +182,7 @@ public class MainSystem {
             }
         } else if (current.role == Role.STUDENT) {
             switch (choice) {
-                case 1 -> {
+                case 1: {
                     UI.header("JOIN CLUB");
                     for (int i = 0; i < clubData.getList().size(); i++)
                         UI.tableRow(String.valueOf(i), clubData.getList().get(i).name);
@@ -197,7 +197,7 @@ public class MainSystem {
                         UI.success("Applied!");
                     }
                 }
-                case 2 -> {
+                case 2: {
                     UI.header("REGISTRATION");
                     ArrayList<Announcement> all = new ArrayList<>();
                     for (Club c : clubData.getList()) {
@@ -218,7 +218,7 @@ public class MainSystem {
                         UI.success("Done!");
                     }
                 }
-                case 4 -> {
+                case 4: {
                     UI.prompt("Club name to search");
                     String query = sc.nextLine().toLowerCase();
                     boolean found = false;
@@ -242,7 +242,7 @@ public class MainSystem {
                     if (!found)
                         UI.error("No clubs found.");
                 }
-                case 5 -> {
+                case 5: {
                     for (Club c : clubData.getList()) {
                         c.clubApplications.stream().filter(a -> a.username.equals(current.username))
                                 .forEach(a -> System.out.println("Club [" + c.name + "]: " + a.status));
