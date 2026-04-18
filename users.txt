@@ -2,3 +2,4 @@ admin|48690|ADMIN|admin@gmail.com|Management
 Leader1|48690|LEADER|leader1@gmail.com|Management
 student1|48690|STUDENT|student1@gmail.com|nothing
 leader1|48690|LEADER|leader1@gmail.com|Communication, project management
+ei|48690|STUDENT|ei@gmail.com|something

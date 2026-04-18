@@ -53,7 +53,7 @@ public class MainSystem {
         if (current.role == Role.ADMIN)
             System.out.println("[1] Create Club [2] View Clubs \n[3] Delete Club [4] Dashboard");
         else if (current.role == Role.LEADER)
-            System.out.println("[1] Post Announcement [2] View Announcements \n[3] Review Apps [4] Manage Members [6] My Club");
+            System.out.println("[1] Post Announcement [2] View Announcements \n[3] Review Applications [4] Manage Members [5] My Club");
         else
             System.out.println("[1] View & Apply Club [2] View & Apply Announcement \n[3] Write Review [4] Search Club [5] Track Apps");
         System.out.println(UI.RED + "[9] Logout [0] Exit" + UI.RESET);
@@ -182,7 +182,7 @@ public class MainSystem {
                     }
                     break;
                 }
-                case 5: {
+                case 4: {
                     UI.clearScreen();
                     UI.header("MEMBERS");
                     System.out.println("Members: " + myClub.members);
@@ -198,7 +198,7 @@ public class MainSystem {
                     }
                     break;
                 }
-                case 6: {
+                case 5: {
                     UI.clearScreen();
                     UI.header("MY CLUB");
                     System.out.println("Name: " + myClub.name + "\nSkill: " + myClub.requiredSkill + "\nMembers: "
@@ -218,7 +218,7 @@ public class MainSystem {
                     Club c = clubData.getList().get(idx);
                     AnnApplication f = getStudentForm(sc, current.username, "Member");
                     f.displaySummary();
-                    UI.prompt("Confirm? (y/n)");
+                    UI.prompt("Confirm your information details? (y/n)");
                     if (sc.nextLine().equalsIgnoreCase("y")) {
                         c.clubApplications.add(f);
                         UI.success("Successfully Applied!");
@@ -235,7 +235,7 @@ public class MainSystem {
                             UI.tableRow(String.valueOf(all.size() - 1), a.title, c.name);
                         }
                     }
-                    UI.prompt("Index");
+                    UI.prompt("Enter Index of the Annoucement you wish to apply");
                     int idx = Integer.parseInt(sc.nextLine());
                     Announcement t = all.get(idx);
                     AnnApplication f = getStudentForm(sc, current.username,
@@ -247,6 +247,18 @@ public class MainSystem {
                         UI.success("Registration Successful!");
                     }
                     break;
+                }
+                case 3:{
+                    UI.clearScreen();
+                    UI.header("WRITE A REVIEW");
+                    UI.prompt("Enter Club or Event Name");
+                    String target = sc.nextLine();
+                    UI.prompt("Rating (1-5)");
+                    int rating = Integer.parseInt(sc.nextLine());
+                    UI.prompt("Comment");
+                    String comment = sc.nextLine();
+                    reviews.add(new Review(target, current.username, rating, comment));
+                    UI.success("Review submitted!");
                 }
                 case 4: {
                     UI.clearScreen();
@@ -303,7 +315,7 @@ public class MainSystem {
         String scN = sc.nextLine();
         UI.prompt("Year");
         String yr = sc.nextLine();
-        UI.prompt("Motivation");
+        UI.prompt("Motivation Letter (Tell us why you want to join)");
         String mot = sc.nextLine();
         return new AnnApplication(u, fn, id, em, scN, yr, pos, mot);
     }

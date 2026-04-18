@@ -4,6 +4,8 @@ CAPP|student1!student1!6802!6802@gmail.com!ADT!1st year!Member!blah blah!PENDING
 END
 Photography Club|leader1|Photography, Editing
 MEMBERS|NONE
+CAPP|ei!ei!6802!6802@gmail.com!ADT!1st year!Member!blah blah!PENDING
+CAPP|ei!ei!681!something!ADT!1st year!Member!blah blah!PENDING
 END
 Photography Club|something|something
 MEMBERS|NONE
@@ -11,4 +13,11 @@ END
 somthing|something|something
 MEMBERS|NONE
 END
+Testing 1|leader1|something
+MEMBERS|Anna,Ei
+AN|Hackathon|20.04.26|blah blah|EVENT|20|ei!ei!something!something!something!something!Part!blah blah!REJECTED
+AN|Something|19.02.28|blah blah|STAFF_CALLING|40|NONE
+AN|something|1|1|EVENT|1|NONE
+END
 REVIEWS
+Photography Club|ei|4|something
