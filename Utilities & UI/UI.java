@@ -44,4 +44,19 @@ public class UI {
     public static void warning(String msg) {
         System.out.println(RED + "⚠ " + msg + RESET);
     }
+
+    public static void clearScreen() {
+    try {
+        if (System.getProperty("os.name").contains("Windows")) {
+            // For Windows: Runs the 'cls' command
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } else {
+            // For Mac/Linux: Runs the 'clear' command
+            new ProcessBuilder("clear").inheritIO().start().waitFor();
+        }
+    } catch (Exception e) {
+        // Fallback: If the OS command fails, just print many new lines
+        for (int i = 0; i < 50; i++) System.out.println();
+    }
+}
 }

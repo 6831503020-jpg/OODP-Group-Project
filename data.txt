@@ -2,4 +2,13 @@ ISC|Student1|Project Management, Team Work, Communication
 MEMBERS|NONE
 CAPP|student1!student1!6802!6802@gmail.com!ADT!1st year!Member!blah blah!PENDING
 END
+Photography Club|leader1|Photography, Editing
+MEMBERS|NONE
+END
+Photography Club|something|something
+MEMBERS|NONE
+END
+somthing|something|something
+MEMBERS|NONE
+END
 REVIEWS

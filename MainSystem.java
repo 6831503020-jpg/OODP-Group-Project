@@ -3,6 +3,7 @@ import java.io.*;
 
 public class MainSystem {
     public static void main(String[] args) {
+        UI.clearScreen();
         Scanner sc = new Scanner(System.in);
         UserManager um = new UserManager();
         DataList<Club> clubData = new DataList<>();
@@ -10,13 +11,14 @@ public class MainSystem {
         loadAllData(clubData, reviews);
 
         while (true) {
+            UI.clearScreen();
             UI.header("MFU Event & Club Management System");
             System.out.println("[1] Login \n[2] Register \n[0] Exit");
             UI.prompt("Choose");
             String startChoice = sc.nextLine();
             
             if (startChoice.equals("0")) {
-                UI.success("Goodbye!");
+                UI.success("Goodbye!. See you again......");
                 System.exit(0);
             } else if (startChoice.equals("2")) {
                 um.register(sc);
@@ -31,6 +33,7 @@ public class MainSystem {
 
             boolean loggedIn = true;
             while (loggedIn) {
+                System.out.println("--------------------------------------------------------------");
                 System.out.println("\n" + UI.BOLD + UI.PURPLE + "── SESSION: " + current.username + " (" + current.role + ") ──" + UI.RESET);
                 displayMenu(current);
                 UI.prompt("Action");
@@ -61,6 +64,8 @@ public class MainSystem {
         if (current.role == Role.ADMIN) {
             switch (choice) {
                 case 1: {
+                    UI.clearScreen();
+                    UI.header("CREATE CLUB");
                     UI.prompt("Club name");
                     String n = sc.nextLine();
                     UI.prompt("Required Skill");
@@ -68,28 +73,37 @@ public class MainSystem {
                     UI.prompt("Leader Username");
                     String l = sc.nextLine();
                     clubData.getList().add(new Club(n, l, s));
-                    UI.success("Club created.");
+                    UI.success("Club successfully created.");
+                    break;
                 }
                 case 2: {
+                    UI.clearScreen();
+                    UI.header("VIEW CLUBS");
                     for (Club c : clubData.getList()) {
                         UI.header("CLUB: " + c.name);
                         System.out.println("Leader: " + c.leader + " | Skill: " + c.requiredSkill);
                     }
+                     break;
                 }
                 case 3: {
+                    UI.clearScreen();
+                    UI.header("DELETE CLUB");
                     UI.prompt("Club name to delete");
                     String n = sc.nextLine();
-                    UI.warning("Delete '" + n + "'? (y/n)");
+                    UI.warning("All the data of club " + n + " will be permanently deleted from the system. Are you sure you want to delete? (y/n)");
                     if (sc.nextLine().equalsIgnoreCase("y")) {
                         clubData.getList().removeIf(c -> c.name.equalsIgnoreCase(n));
-                        UI.success("Deleted.");
+                        UI.success("Club " + n + " Deleted.");
                     }
+                      break;
                 }
                 case 4: {
+                    UI.clearScreen();
                     UI.header("SYSTEM DASHBOARD");
                     System.out.println(
                             "Total Clubs: " + clubData.getList().size() + "\nTotal Reviews: " + reviews.size());
                 }
+                break;
             }
         } else if (current.role == Role.LEADER) {
             Club myClub = null;
@@ -103,6 +117,8 @@ public class MainSystem {
 
             switch (choice) {
                 case 1: {
+                    UI.clearScreen();
+                    UI.header("CREATE ANNOUCEMENT");
                     UI.prompt("Title");
                     String t = sc.nextLine();
                     UI.prompt("Type [1] Event [2] Staff");
@@ -115,9 +131,12 @@ public class MainSystem {
                     int cap = Integer.parseInt(sc.nextLine());
                     myClub.announcements.add(new Announcement(t, d, desc,
                             ty == 1 ? AnnouncementType.EVENT : AnnouncementType.STAFF_CALLING, cap));
-                    UI.success("Posted.");
+                    UI.success("Announcement Successfully Posted.");
+                    break;
                 }
                 case 2: {
+                    UI.clearScreen();
+                    UI.header("MY ANNOUCMENTS");
                     UI.header("ANNOUNCEMENTS: " + myClub.name);
                     UI.tableHeader("Index", "Title", "Applicants/Cap", "Type");
                     for (int i = 0; i < myClub.announcements.size(); i++) {
@@ -125,8 +144,10 @@ public class MainSystem {
                         UI.tableRow(String.valueOf(i), a.title, a.applications.size() + "/" + a.capacity,
                                 a.type.toString());
                     }
+                    break;
                 }
                 case 3: {
+                    UI.clearScreen();
                     UI.header("REVIEW APPLICATIONS");
                     System.out
                             .println("[1] Club Memberships (" + myClub.clubApplications.size() + ") [2] Announcements");
@@ -159,8 +180,10 @@ public class MainSystem {
                             }
                         }
                     }
+                    break;
                 }
                 case 5: {
+                    UI.clearScreen();
                     UI.header("MEMBERS");
                     System.out.println("Members: " + myClub.members);
                     UI.prompt("[1] Add [2] Remove");
@@ -173,16 +196,20 @@ public class MainSystem {
                         else
                             myClub.members.remove(u.trim());
                     }
+                    break;
                 }
                 case 6: {
+                    UI.clearScreen();
                     UI.header("MY CLUB");
                     System.out.println("Name: " + myClub.name + "\nSkill: " + myClub.requiredSkill + "\nMembers: "
                             + myClub.members.size());
                 }
+                break;
             }
         } else if (current.role == Role.STUDENT) {
             switch (choice) {
                 case 1: {
+                    UI.clearScreen();
                     UI.header("JOIN CLUB");
                     for (int i = 0; i < clubData.getList().size(); i++)
                         UI.tableRow(String.valueOf(i), clubData.getList().get(i).name);
@@ -194,10 +221,12 @@ public class MainSystem {
                     UI.prompt("Confirm? (y/n)");
                     if (sc.nextLine().equalsIgnoreCase("y")) {
                         c.clubApplications.add(f);
-                        UI.success("Applied!");
+                        UI.success("Successfully Applied!");
                     }
+                    break;
                 }
                 case 2: {
+                    UI.clearScreen();
                     UI.header("REGISTRATION");
                     ArrayList<Announcement> all = new ArrayList<>();
                     for (Club c : clubData.getList()) {
@@ -212,13 +241,16 @@ public class MainSystem {
                     AnnApplication f = getStudentForm(sc, current.username,
                             t.type == AnnouncementType.STAFF_CALLING ? "Staff" : "Part");
                     f.displaySummary();
-                    UI.prompt("Confirm? (y/n)");
+                    UI.prompt("Confirm information details? (y/n)");
                     if (sc.nextLine().equalsIgnoreCase("y")) {
                         t.applications.add(f);
-                        UI.success("Done!");
+                        UI.success("Registration Successful!");
                     }
+                    break;
                 }
                 case 4: {
+                    UI.clearScreen();
+                    UI.header("SEARCH CLUB");
                     UI.prompt("Club name to search");
                     String query = sc.nextLine().toLowerCase();
                     boolean found = false;
@@ -238,11 +270,14 @@ public class MainSystem {
                                             + a.description);
                             }
                         }
+        
                     }
                     if (!found)
                         UI.error("No clubs found.");
+                     break;
                 }
                 case 5: {
+                    UI.clearScreen();
                     for (Club c : clubData.getList()) {
                         c.clubApplications.stream().filter(a -> a.username.equals(current.username))
                                 .forEach(a -> System.out.println("Club [" + c.name + "]: " + a.status));
@@ -250,6 +285,7 @@ public class MainSystem {
                             an.applications.stream().filter(a -> a.username.equals(current.username))
                                     .forEach(a -> System.out.println("Announce [" + an.title + "]: " + a.status));
                     }
+                     break;
                 }
             }
         }
